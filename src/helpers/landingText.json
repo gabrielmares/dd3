@@ -1,0 +1,7 @@
+{
+  "firstSentence": "Adivina la palabra oculta en cinco intentos",
+  "secondSentence": "Cada intento debe ser una palabra válida de 5 letras.",
+  "thirdSentence": "Después de cada intento el color de las letras cambia para mostrar qué tan cerca estás de acertar la palabra.",
+  "fourthSentence": "Puede haber letras repetidas. Las pistas son independientes para cada letra.",
+  "fifthSentence": "¡Una palabra nueva cada 5 minutos!"
+}

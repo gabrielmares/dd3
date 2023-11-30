@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --bg-light-container: rgba(243, 243, 243, 0.89);
+    --bg-light-instructions: rgba(243, 243, 243, 1);
+    --bg-dark-container: rgba(38, 43, 60, 0.89);
+    --bg-dark-instructions: rgba(38, 43, 60, 1);
+
+    --bg-boxLetter-empty: rgba(147, 155, 159, 0.3);
+    --bg-boxLetter-correct: rgba(106, 170, 100, 1);
+
+    --bg-dark-headerBar: hsla(220, 9%, 87%, 0.03);
+    --input-light-background: rgb(222 225 226);
+}

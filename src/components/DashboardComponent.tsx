@@ -1,18 +1,21 @@
-import { useMemo, useDeferredValue, useState, Suspense, useContext, useRef } from 'react'
+import { useDeferredValue, useState, useContext, useRef } from 'react'
 import { WordleState } from '../context/wordleContext';
 import list from '../helpers/dictionary';
-import BoxLetter from './BoxLetter';
+import FormContainer from './FormContainer';
+
+
 
 const DashboardComponent = () => {
     const { colorTheme } = useContext(WordleState)
     // const [shiftWord, setShiftWord] = useState<boolean>(false)
-    const [inputWord, setInputWord] = useState<[]>([]);
-    const refs = [useRef<HTMLElement | number>(null), useRef<HTMLElement | number>(null), useRef<HTMLElement | number>(null), useRef<HTMLElement | number>(null), useRef<HTMLElement | number>(null)];
-
+    const [inputWord, setInputWord] = useState<string[]>([]);
+    const refs = useRef<HTMLFormElement | HTMLDivElement>(null);
+    const activeRow = useRef<number>(0);
     // load list of words
     const lazyLoad: string[] = useDeferredValue(list);
+    const rows: string[] = ("words").split("")
 
-    // REMOVE WORK AFTER 
+    // REMOVE WORD
     // const restartShift = () => setShiftWord(prev => !prev)
     // const updatedList = useMemo(() => {
     //     if (shiftWord) {
@@ -21,95 +24,26 @@ const DashboardComponent = () => {
     //     }
     // }, [shiftWord])
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setInputWord([...inputWord,
-        e.target.value]);
-
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {        
+        setInputWord([...inputWord, e.target.value]);
+        const form = refs.current
+        const input: HTMLInputElement = form?.querySelector(`.input-${activeRow.current}${inputWord.length + 1}`);
+        input?.focus();
     }
-
     return (
-        <Suspense fallback={<h1>loading....</h1>}>
-            <div className="mt-20 h-2/5 mr-auto ml-auto w-5/12 ">
-                <div className=" grid grid-cols-5">
-                    {lazyLoad[0]?.split("").map((char, index) => (
-                        <BoxLetter
-                            key={char + index}
-                            letter={""}
-                            borderColor={false}
-                            colorTheme={colorTheme}
-                            background="bg-[--bg-boxLetter-empty]"
-                            inputBox={true}
-                            handleChange={handleChange}
-                            position={index}
-                            currentWord={inputWord}
-                            reference={refs[parseInt(inputWord.length)]}
-                        />
-                    ))}
-                </div>
-                <div className=" grid grid-cols-5">
-                    {lazyLoad[0]?.split("").map((char, index) => (
-                        <BoxLetter
-                            key={char + index}
-                            letter={""}
-                            borderColor={false}
-                            colorTheme={colorTheme}
-                            background="bg-[--bg-boxLetter-empty]"
-                            inputBox={true}
-                            handleChange={handleChange}
-                            position={index}
-                            currentWord={inputWord}
-                        />
-                    ))}
-                </div>
-                <div className=" grid grid-cols-5">
-                    {lazyLoad[0]?.split("").map((char, index) => (
-                        <BoxLetter
-                            key={char + index}
-                            letter={""}
-                            borderColor={false}
-                            colorTheme={colorTheme}
-                            background="bg-[--bg-boxLetter-empty]"
-                            inputBox={true}
-                            handleChange={handleChange}
-                            position={index}
-                            currentWord={inputWord}
-
-                        />
-                    ))}
-                </div>
-                <div className=" grid grid-cols-5">
-                    {lazyLoad[0]?.split("").map((char, index) => (
-                        <BoxLetter
-                            key={char + index}
-                            letter={""}
-                            borderColor={false}
-                            colorTheme={colorTheme}
-                            background="bg-[--bg-boxLetter-empty]"
-                            inputBox={true}
-                            handleChange={handleChange}
-                            position={index}
-                            currentWord={inputWord}
-                            
-                        />
-                    ))}
-                </div>
-                <div className=" grid grid-cols-5">
-                    {lazyLoad[0]?.split("").map((char, index) => (
-                        <BoxLetter
-                            key={char + index}
-                            letter={""}
-                            borderColor={false}
-                            colorTheme={colorTheme}
-                            background="bg-[--bg-boxLetter-empty]"
-                            inputBox={true}
-                            position={index}
-                            currentWord={inputWord}
-                            handleChange={handleChange}
-                        />
-                    ))}
-                </div>
-            </div>
-        </Suspense>
+        <div className="mt-20 h-2/5 mr-auto ml-auto w-5/12 ">
+            {rows.map((word, index) =>
+            (<FormContainer
+                colorTheme={colorTheme}
+                refs={refs}
+                handleChange={handleChange}
+                word={lazyLoad[0]}
+                rowNumber={index}
+                key={`${index}${refs + lazyLoad[0]}${word}`}
+                activeRow={activeRow.current}
+            />))
+            }
+        </div>
     );
 }
 

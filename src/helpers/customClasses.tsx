@@ -40,3 +40,6 @@ export const landingFooter =
 
 export const landingExample =
     "mt-[16px] font-bold font-roboto text-left text-[19px] leading-[22.27px] dark:text-white";
+
+export const inputClass = (position: number, rowNumber: number) =>
+    `${"input-" + rowNumber + position} ` + "font-roboto text-white text-center border border-black/30 rounded-sm font-bold text-3xl black uppercase h-[45px] w-[36px] bg-[--input-light-background] dark:bg-[--bg-boxLetter-empty] dark:boder-[none] dark:opacity-1  "

@@ -10,9 +10,9 @@ export default function BoxLetter({
   inputBox = false,
   colorTheme,
   position,
-  currentWord,
   handleChange,
-  reference
+  activeRow,
+  rowNumber
 }: BoxWithLetter) {
   return (
     <div
@@ -22,7 +22,15 @@ export default function BoxLetter({
         colorTheme,
       })}
     >
-      <BoxContent currentWord={currentWord} fontColor={fontColor} letter={letter} inputBox={inputBox} handleChange={handleChange} position={position} reference={reference} />
+      <BoxContent
+        fontColor={fontColor}
+        letter={letter}
+        inputBox={inputBox}
+        handleChange={handleChange}
+        position={position}
+        activeRow={activeRow}
+        rowNumber={rowNumber}
+      />
     </div>
   );
 }

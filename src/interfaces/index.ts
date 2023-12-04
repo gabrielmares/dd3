@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface initialState {
     colorTheme: string;
     showInstructions: boolean;
@@ -42,20 +44,23 @@ export interface BoxWithLetter {
     borderColor?: boolean;
     inputBox: boolean;
     position: number;
-    currentWord: [];
+    currentWord?: string | string[] | [];
     colorTheme?: string;
     reference: HTMLInputElement | React.LegacyRef<HTMLInputElement> | number;
     handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    activeRow: number;
+    rowNumber: number;
 }
 
 export interface BoxContentProps {
     inputBox: boolean;
     position: number;
     fontColor: FontBoxColor;
-    currentWord: [];
     letter: string;
-    reference: HTMLInputElement | React.LegacyRef<HTMLInputElement>;
+    reference?: HTMLInputElement | React.LegacyRef<HTMLInputElement>;
     handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    activeRow: number;
+    rowNumber: number;
 }
 
 export interface TextDescription {
@@ -89,4 +94,14 @@ export interface descriptionWords {
     firstText: string;
     emphasis: string;
     restText: string;
+}
+
+export interface FormContainer {
+    refs?: HTMLFormElement | HTMLFormElement | HTMLDivElement;
+    colorTheme: string;
+    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    word: string;
+    rowNumber: number;
+    activeRow: number;
+    inputBox: boolean;
 }
